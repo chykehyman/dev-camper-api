@@ -6,7 +6,8 @@
   "scripts": {
     "start": "NODE_ENV=production && node ./build/server.js",
     "build": "babel ./src -d ./build",
-    "dev": "nodemon --watch src --exec babel-node -- src/server.js"
+    "dev-linux": "export $(cat .env | xargs) && nodemon --watch src --exec babel-node -- src/server.js",
+    "dev-windows": "(for /F \"tokens=*\" %i in (.env) do set %i) && && nodemon --watch src --exec babel-node -- src/server.js"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,8 @@
     "express": "^4.17.1",
     "mongoose": "^5.10.11",
     "morgan": "^1.10.0",
+    "node-geocoder": "^3.27.0",
+    "slugify": "^1.4.6",
     "winston": "^3.3.3"
   }
 }

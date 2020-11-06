@@ -1,11 +1,10 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import morgan from 'morgan';
 import 'colors';
 
 import connectDB from './db.config';
-
-dotenv.config();
+import errorHandler from './middlewares/errorHandler';
+import bootcamp from './routes/bootcamp';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -23,6 +22,9 @@ app.use(
     }
   )
 );
+app.use(express.json());
+app.use('/api/v1/bootcamps', bootcamp);
+app.use(errorHandler);
 
 const server = app.listen(PORT, () =>
   console.log(`Server running in ${env} mode on port ${PORT}`.yellow.bold)
